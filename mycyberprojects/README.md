@@ -2,11 +2,13 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![TODO: Update the path with the name of your diagram](Images/diagram_filename.png)
+/Users/gez/Documents/GitHub/https-github.com-Gerrymelb-mycyberfolio/mycyberprojects/Images
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
+
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the Yaml files may be used to install only certain pieces of it, such as Filebeat.
+
+  /Users/gez/Documents/GitHub/https-github.com-Gerrymelb-mycyberfolio/mycyberprojects/Yaml files/filebeat-config.yml.rtf
 
 This document contains the following details:
 - Description of the Topology
@@ -22,25 +24,27 @@ This document contains the following details:
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the Damn Vulnerable Web Application.
 
 Load balancing ensures that the application will be highly stable and secure , in addition to restricting access to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Concerning the security aspect that load balancers protect, this would be availability via redundancy. 
+The advantages of a jump box is a secured locked down enivronment for loggin into and the ability to be the base for mass configuration and deployment over the network.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file system and system and system metrics such as CPU usage, logins and more.
 
-- _
-Filebeat watches and monitors the log or locations that users specify. It also collects log events, and forward forwards them either to Elasticsearch or Logstash for indexing. 
 
-- _TODO: What does Metricbeat record?_
-Metricbeat takes  the metrics and statistics that it collects and ships them to the output that you specify, such as Elasticsearch or Logstash. It helps you monitor your servers by recording metrics from the system and services running on the server.
+Filebeat watches and monitors the log or locations that users specify. It also collects log events, and forward forwards them either to Elasticsearch or Logstash for indexing. 
+Filebeat watches for log files.
+
+Metricbeat takes  the metrics and statistics that it collects and ships them to the output that you specify, such as Elasticsearch or Logstash. It helps you monitor your servers by recording metrics from the system and services running on the server. Metricbeat records  processes from your operating system. 
+
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
+
 
 
 
 | Name     | Function   | IP Address | Operating System |
 |----------|------------|------------|------------------|
 | Jumpbox  | Gateway    | 10.0.0.5   | Linux            |
-| Web-1    | DVWaA      | 10.0.0.7   | Linux            |
+| Web-1    | DVWA       | 10.0.0.7   | Linux            |
 | Web2     | container  | 10.0.0.8   | Linux            |
 | ProjVM   | ELK server | 10.3.0.4   | Linux            |
 
@@ -56,39 +60,43 @@ Only the (jump box machine) can accept connections from the Internet. Access to 
 10.3.0.4
 
 Machines within the network can only be accessed by (ssh'ing into them).
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
-(The jump box was allowed to access the Elk VM, ip address 10.0.0.5)
+
+(The jump box was allowed to access the Elk VM, ip address 10.3.0.4)
 
 A summary of the access policies in place can be found in the table below.
 
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Jump Box | Yes                 | 10.3.0.4             |
+| ProjvM   | Yes                 |  10.0.0.5            |
+| Web-1    | No                  |  10.0.0.5 10.3.0.4   |
+|    Web2  | No                  |  10.0.0.5 10.3.0.4   |
+
+
 
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
-(Main advantage is it's one click simplicity, as in you only have to run the shell once and everything is setup.
+The main advantage is it's one click simplicity, as in you only have to run the shell once and everything is setup.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets,  . E.g., install Docker; download image; etc._
+
 - Install Docker
 - Download Image
 - Copy eg: Copy filbeat.yml
 - Command 
-- Pip , to install python
+- Pip , to install python3
+- Increases it's virtual memory
+- downloads and launces a docker Elk container
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
  sudo docker ps -a
-//readme file/Images
+  /Users/gez/Documents/GitHub/https-github.com-Gerrymelb-mycyberfolio/mycyberprojects/Images/elk instance.png
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+ 
 (10.0.0.7  10.0.0.8)
 
 We have installed the following Beats on these machines:
